@@ -14,4 +14,4 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         push: true 
-        tags: d3ltarak/getting-started-app
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/getting-started-app
