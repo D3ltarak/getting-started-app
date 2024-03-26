@@ -2,4 +2,15 @@
 # - déclencher le build d'une nouvelle image docker en utilisant le Dockerfile
 # - et faire un push vers dockerHub
 name: build and push image
+run-name: $(( github.actor )) is learning Github Actions
 on: [push]
+jobs:
+  check-bats-version:
+    runs-on: getting-started
+    steps:
+    - uses: actions/checkhout@v3
+    - uses: actions/setup-node@v3
+    with:
+      node-version: '14'
+    -run: npm install -g bats
+    -run: bats -v
