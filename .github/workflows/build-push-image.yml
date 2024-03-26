@@ -12,4 +12,4 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         push: true 
-      
+        tags: D3ltarak/getting-started-app/.github/workflows/build-push-image.yml:tag
