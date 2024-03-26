@@ -2,7 +2,6 @@
 # - déclencher le build d'une nouvelle image docker en utilisant le Dockerfile
 # - et faire un push vers dockerHub
 name: build and push image
-run-name: $(( github.actor )) is learning Github Actions
 on: [push]
 jobs:
   check-bats-version:
