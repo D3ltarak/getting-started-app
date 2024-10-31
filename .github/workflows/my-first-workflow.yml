@@ -17,7 +17,7 @@ jobs:
         uses: docker/login-action@v3.3.0
         with:
           username: "d3lta29"
-          password: ${{ secrets.DOCKER_HUB_TOKEN }} # Assurez-vous que ce secret est défini dans vos paramètres GitHub
+          password: "dckr_pat_sxOdBPlT4q_YmWOo0JUvBfyYuyc" # Assurez-vous que ce secret est défini dans vos paramètres GitHub
 
       - name: Build Docker image
         run: |
