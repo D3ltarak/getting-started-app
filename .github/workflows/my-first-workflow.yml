@@ -1,1 +1,51 @@
+name: Create Dockerfile
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Permet de déclencher manuellement le workflow
+
+jobs:
+  create_dockerfile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Dockerfile
+        run: |
+          cat <<EOF > Dockerfile
+          # Utilise une image de base pour Node.js
+          FROM node:14
+          
+          # Définir le répertoire de travail
+          WORKDIR /app
+          
+          # Copier les fichiers package.json et package-lock.json
+          COPY package*.json ./
+          
+          # Installer les dépendances
+          RUN npm install
+          
+          # Copier tout le code de l'application
+          COPY . .
+          
+          # Exposer le port de l'application
+          EXPOSE 3000
+          
+          # Commande pour lancer l'application
+          CMD ["node", "app.js"]
+          EOF
+
+      - name: Commit Dockerfile
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add Dockerfile
+          git commit -m "Add Dockerfile created by GitHub Action"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
