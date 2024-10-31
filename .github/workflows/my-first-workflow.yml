@@ -13,15 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Log in to GitHub Container Registry
-        run:  TOKEN="dckr_pat_sxOdBPlT4q_YmWOo0JUvBfyYuyc"
-              USERNAME="d3lta29"
-              echo $TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
+      - name: Log in to Docker Hub
+        env:
+          DOCKER_HUB_USERNAME: d3lta29
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}  # Définissez ce secret dans vos paramètres GitHub
+        run: |
+          echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USERNAME --password-stdin
 
       - name: Build Docker image
         run: |
           docker build -t d3lta29/poire .
 
-      - name: Push Docker image
+      - name: Push Docker image to Docker Hub
         run: |
           docker push d3lta29/poire
